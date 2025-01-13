@@ -1,4 +1,4 @@
-# tracking-blocker-for-woocommerce
+# Tracking Blocker for WooCommerce®
 Blocks all outbound HTTP requests to `tracking.woocommerce.com/v1/` and logs the original data sent to the endpoint for debugging and analysis.
 
 ## Description
