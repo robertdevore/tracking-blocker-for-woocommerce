@@ -12,7 +12,7 @@
   * Plugin Name: Tracking Blocker for WooCommerce®
   * Description: Blocks all outbound HTTP requests to tracking.woocommerce.com/v1/ and logs the original data.
   * Plugin URI:  https://github.com/robertdevore/tracking-blocker-for-woocommerce/
-  * Version:     1.0.0
+  * Version:     1.1.0
   * Author:      Robert DeVore
   * Author URI:  https://robertdevore.com/
   * License:     GPL-2.0+
@@ -27,6 +27,10 @@ if ( ! defined( 'WPINC' ) ) {
     die;
 }
 
+// Define the plugin version.
+define( 'TBWC_PLUGIN_VERSION', '1.1.0' );
+define( 'TBWC_PLUGIN_BASENAME', plugin_basename( __FILE__ ) );
+
 require 'vendor/plugin-update-checker/plugin-update-checker.php';
 use YahnisElsts\PluginUpdateChecker\v5\PucFactory;
 
@@ -38,10 +42,6 @@ $myUpdateChecker = PucFactory::buildUpdateChecker(
 
 // Set the branch that contains the stable release.
 $myUpdateChecker->setBranch( 'main' );
-
-// Define the plugin version.
-define( 'TBWC_PLUGIN_VERSION', '5.0.0' );
-define( 'TBWC_PLUGIN_BASENAME', plugin_basename( __FILE__ ) );
 
 // Check if Composer's autoloader is already registered globally.
 if ( ! class_exists( 'RobertDevore\WPComCheck\WPComPluginHandler' ) ) {
