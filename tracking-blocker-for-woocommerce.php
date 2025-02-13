@@ -27,16 +27,6 @@ if ( ! defined( 'WPINC' ) ) {
     die;
 }
 
-// Include the install plugin.
-$install_file = plugin_dir_path( __FILE__ ) . 'includes/install.php';
-
-if ( file_exists( $install_file ) ) {
-    require_once $install_file;
-    error_log( 'install.php was included successfully.' );
-} else {
-    error_log( 'install.php not found in includes directory.' );
-}
-
 require 'vendor/plugin-update-checker/plugin-update-checker.php';
 use YahnisElsts\PluginUpdateChecker\v5\PucFactory;
 
@@ -52,6 +42,15 @@ $myUpdateChecker->setBranch( 'main' );
 // Define the plugin version.
 define( 'TBWC_PLUGIN_VERSION', '5.0.0' );
 define( 'TBWC_PLUGIN_BASENAME', plugin_basename( __FILE__ ) );
+
+// Check if Composer's autoloader is already registered globally.
+if ( ! class_exists( 'RobertDevore\WPComCheck\WPComPluginHandler' ) ) {
+    require_once __DIR__ . '/vendor/autoload.php';
+}
+
+use RobertDevore\WPComCheck\WPComPluginHandler;
+
+new WPComPluginHandler( plugin_basename( __FILE__ ), 'https://robertdevore.com/why-this-plugin-doesnt-support-wordpress-com-hosting/' );
 
 /**
  * Blocks outbound HTTP requests to a specific WooCommerce tracking URL and logs the original data.
