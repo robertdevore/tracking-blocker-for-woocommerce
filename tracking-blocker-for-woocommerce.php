@@ -53,6 +53,17 @@ use RobertDevore\WPComCheck\WPComPluginHandler;
 new WPComPluginHandler( plugin_basename( __FILE__ ), 'https://robertdevore.com/why-this-plugin-doesnt-support-wordpress-com-hosting/' );
 
 /**
+ * Load plugin text domain for localization.
+ *
+ * @since  1.1.0
+ * @return void
+ */
+function tbwp_load_textdomain() {
+    load_plugin_textdomain( 'tracking-blocker-for-woocommerce', false, dirname( plugin_basename( __FILE__ ) ) . '/languages' );
+}
+add_action( 'plugins_loaded', 'tbwp_load_textdomain' );
+
+/**
  * Blocks outbound HTTP requests to a specific WooCommerce tracking URL and logs the original data.
  *
  * This function intercepts HTTP requests made by WordPress, checks if the URL matches
